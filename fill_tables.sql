@@ -2404,3 +2404,25 @@ INSERT INTO employee (first_name, last_name, birthday, personal_number, salary, 
 INSERT INTO emailcontact (employee, email) VALUES (600, 'Daniel@Zeleny.cz');
 INSERT INTO phonecontact (employee, phone) VALUES (600, '+420 712304388');
 INSERT INTO employedin (employee, plant) VALUES (600, 5);
+
+
+INSERT INTO productmodel (product_type, model_version) VALUES ('DNOX5', 1);
+INSERT INTO modeldevelopedby (model, employee) VALUES (1, 509);
+INSERT INTO productmodel (product_type, model_version) VALUES ('DNOX5', 2);
+INSERT INTO modeldevelopedby (model, employee) VALUES (2, 231);
+INSERT INTO productmodel (product_type, model_version) VALUES ('Pedal1', 1);
+INSERT INTO modeldevelopedby (model, employee) VALUES (3, 162);
+INSERT INTO productmodel (product_type, model_version) VALUES ('Pedal1', 2);
+INSERT INTO modeldevelopedby (model, employee) VALUES (4, 105);
+INSERT INTO productmodel (product_type, model_version) VALUES ('Pedal2', 1);
+INSERT INTO modeldevelopedby (model, employee) VALUES (5, 476);
+INSERT INTO productmodel (product_type, model_version) VALUES ('Pedal2', 2);
+INSERT INTO modeldevelopedby (model, employee) VALUES (6, 566);
+INSERT INTO productmodel (product_type, model_version) VALUES ('DNOX6', 1);
+INSERT INTO modeldevelopedby (model, employee) VALUES (7, 41);
+INSERT INTO productmodel (product_type, model_version) VALUES ('DNOX6', 2);
+INSERT INTO modeldevelopedby (model, employee) VALUES (8, 533);
+INSERT INTO productmodel (product_type, model_version) VALUES ('Seat belt', 1);
+INSERT INTO modeldevelopedby (model, employee) VALUES (9, 273);
+INSERT INTO productmodel (product_type, model_version) VALUES ('Seat belt', 2);
+INSERT INTO modeldevelopedby (model, employee) VALUES (10, 516);
