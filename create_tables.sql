@@ -1,5 +1,8 @@
 CREATE TABLE ManufacturingPlant (
     plant_id SERIAL PRIMARY KEY,
+    street VARCHAR(50) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    zip INT NOT NULL,
     established DATE NOT NULL
 );
 
@@ -11,23 +14,10 @@ CREATE TABLE Employee (
     personal_number INT NOT NULL,
     salary INT NOT NULL,
     position VARCHAR(50),
+    street VARCHAR(50) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    zip INT NOT NULL,
     UNIQUE (personal_number)
-);
-
-CREATE TABLE Location (
-    plant SERIAL PRIMARY KEY CONSTRAINT location_fk_plant REFERENCES ManufacturingPlant(plant_id),
-    street VARCHAR(50) NOT NULL,
-    city VARCHAR(50) NOT NULL,
-    zip INT NOT NULL,
-    UNIQUE (plant)
-);
-
-CREATE TABLE Residence (
-    employee SERIAL PRIMARY KEY CONSTRAINT location_fk_employee REFERENCES Employee(employee_id),
-    street VARCHAR(50) NOT NULL,
-    city VARCHAR(50) NOT NULL,
-    zip INT NOT NULL,
-    UNIQUE(employee)
 );
 
 CREATE TABLE EmailContact (
