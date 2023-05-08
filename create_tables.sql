@@ -18,14 +18,16 @@ CREATE TABLE Location (
     plant SERIAL PRIMARY KEY CONSTRAINT location_fk_plant REFERENCES ManufacturingPlant(plant_id),
     street VARCHAR(50) NOT NULL,
     city VARCHAR(50) NOT NULL,
-    zip INT NOT NULL
+    zip INT NOT NULL,
+    UNIQUE (plant)
 );
 
 CREATE TABLE Residence (
     employee SERIAL PRIMARY KEY CONSTRAINT location_fk_employee REFERENCES Employee(employee_id),
     street VARCHAR(50) NOT NULL,
     city VARCHAR(50) NOT NULL,
-    zip INT NOT NULL
+    zip INT NOT NULL,
+    UNIQUE(employee)
 );
 
 CREATE TABLE EmailContact (
@@ -62,34 +64,16 @@ CREATE TABLE ModelDevelopedBy (
 
 CREATE TABLE ProductionLine (
     line_id SERIAL PRIMARY KEY,
-    production_capacity INT NOT NULL
-);
-
-CREATE TABLE LineMaster (
-    line_id SERIAL PRIMARY KEY CONSTRAINT linemaster_fk_line REFERENCES ProductionLine(line_id),
-    employee SERIAL NOT NULL CONSTRAINT linemaster_fk_employee REFERENCES Employee(employee_id)
-);
-
-CREATE TABLE LineLocation (
-    line_id SERIAL NOT NULL CONSTRAINT lineloc_fk_line REFERENCES ProductionLine(line_id),
     plant SERIAL NOT NULL CONSTRAINT lineloc_fk_plant REFERENCES ManufacturingPlant(plant_id),
-    PRIMARY KEY (line_id, plant)
+    master SERIAL NOT NULL CONSTRAINT linemaster_fk_employee REFERENCES Employee(employee_id),
+    production_capacity INT NOT NULL
 );
 
 CREATE TABLE Machine (
     machine_id SERIAL PRIMARY KEY,
-    machine_type VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE MachineMaster (
-    machine SERIAL PRIMARY KEY CONSTRAINT machinemaster_fk_machine REFERENCES Machine(machine_id),
-    employee SERIAL NOT NULL CONSTRAINT machinemaster_fk_employee REFERENCES Employee(employee_id)
-);
-
-CREATE TABLE MachineLocation (
-    machine SERIAL NOT NULL CONSTRAINT machinemaster_fk_machine REFERENCES Machine(machine_id),
+    machine_type VARCHAR(50) NOT NULL,
     line_id SERIAL NOT NULL CONSTRAINT machineloc_fk_line REFERENCES ProductionLine(line_id),
-    PRIMARY KEY (machine, line_id)
+    master SERIAL NOT NULL CONSTRAINT machinemaster_fk_employee REFERENCES Employee(employee_id)
 );
 
 CREATE TABLE MachineMaintainedBy (
@@ -114,7 +98,8 @@ CREATE TABLE Product (
 
 CREATE TABLE ProcessData (
     product SERIAL NOT NULL CONSTRAINT processdata_fk_product REFERENCES Product(product_id),
-    process_data VARCHAR(1000) NOT NULL,
+    data_desc VARCHAR(20) NOT NULL,
+    process_data DOUBLE PRECISION[] NOT NULL,
     PRIMARY KEY (product, process_data)
 );
 
@@ -122,10 +107,4 @@ CREATE TABLE ProductAnalysedBy (
     product SERIAL NOT NULL CONSTRAINT productanalysed_fk_product REFERENCES Product(product_id),
     employee SERIAL NOT NULL CONSTRAINT productanalysed_fk_employee REFERENCES Employee(employee_id),
     PRIMARY KEY (product, employee)
-);
-
-CREATE TABLE ProductProducedOn (
-    product SERIAL NOT NULL CONSTRAINT productproduced_fk_product REFERENCES Product(product_id),
-    line_id SERIAL NOT NULL CONSTRAINT productproduced_fk_line REFERENCES ProductionLine(line_id),
-    PRIMARY KEY (product, line_id)
 );
