@@ -98,3 +98,7 @@ CREATE TABLE ProductAnalysedBy (
     employee SERIAL NOT NULL CONSTRAINT productanalysed_fk_employee REFERENCES Employee(employee_id),
     PRIMARY KEY (product, employee)
 );
+
+CREATE TABLE Intern (
+    school VARCHAR(30)
+) INHERITS (employee);
